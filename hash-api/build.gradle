@@ -1,0 +1,22 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.amqp:spring-rabbit'
+
+    implementation "org.springframework.cloud:spring-cloud-starter-bootstrap:${springCloudBootstrapVersion}"
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation "io.github.openfeign:feign-okhttp:${openFeignVersion}"
+    implementation "io.github.openfeign:feign-reactive-wrappers:${openFeignVersion}"
+    implementation "io.github.openfeign:feign-gson:${openFeignVersion}"
+
+    implementation 'com.google.code.gson:gson'
+
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'com.h2database:h2'
+}
+evaluationDependsOn(':repository')
+evaluationDependsOn(':infrastructure')

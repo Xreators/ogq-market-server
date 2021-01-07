@@ -1,0 +1,55 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtualHost: market
+    username: rabbitmqogq
+    password: rabbitmqogq
+
+message:
+  relay:
+    topic: ocs.topic
+    queue:
+      asset:
+        createHashReq: ocs.hash.asset.createHash
+        relayHashReq: ocs.hash.asset.relayHash
+      creator:
+        createHashReq: ocs.hash.creator.createHash
+        relayHashReq: ocs.hash.creator.relayHash
+    routingKey:
+      asset:
+        createHashReq: ocs.hash.asset.createHash
+        relayHashReq: ocs.hash.asset.relayHash
+      creator:
+        createHashReq: ocs.hash.creator.createHash
+        relayHashReq: ocs.hash.creator.relayHash
+
+relay:
+  param:
+    artwork:
+      isHashCreate: false
+      isHashRelay: true
+      createReqCntPerCycle: 25
+      limitDay: 7
+      numOfHashPerRelay: 30
+      numOfCreateQueueMsgThreshold: 10000
+      numOfRelayQueueMsgThreshold: 5000
+    creator:
+      isHashCreate: false
+      isHashRelay: false
+      createReqCntPerCycle: 30
+      limitDay: 7
+      numOfHashPerRelay: 30
+      numOfCreateQueueMsgThreshold: 10000
+      numOfRelayQueueMsgThreshold: 5000
+
+
+logging:
+  #pattern:
+  #console: "[%-5level %d{yyyy-MM-dd HH:mm:ss}] [%-8thread] [%logger{0}:%line] - %msg%n"
+  level:
+    ROOT: INFO
+    com:
+      ogqcorp: DEBUG

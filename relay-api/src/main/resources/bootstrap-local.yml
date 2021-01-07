@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: marketRelay
+  cloud:
+    config:
+      enabled: false

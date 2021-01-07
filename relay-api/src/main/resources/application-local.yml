@@ -1,0 +1,101 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    title: OGQ Market
+    name: Relay-API
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: false
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
+  output:
+    ansi:
+      enabled: DETECT
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtualHost: market
+    username: rabbitmqogq
+    password: rabbitmqogq
+
+datasource:
+  account:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: ogqm
+    password: mysqlogq
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://localhost:3306/market_test_account?verifyServerCertificate=false&useSSL=false&requireSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  content:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: ogqm
+    password: mysqlogq
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://localhost:3306/market_test_content?verifyServerCertificate=false&useSSL=false&requireSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  hash:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: ogqm
+    password: mysqlogq
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://localhost:3306/market_test_hash?verifyServerCertificate=false&useSSL=false&requireSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+
+message:
+  relay:
+    topic: ocs.topic
+    queue:
+      asset:
+        createHashReq: ocs.hash.asset.createHash
+        relayHashReq: ocs.hash.asset.relayHash
+    routingKey:
+      asset:
+        createHashReq: ocs.hash.asset.createHash
+        relayHashReq: ocs.hash.asset.relayHash
+  content:
+    topic: ogqmarket
+    queue:
+      certification:
+        next-code: content.certification.nextCode
+    routingKey:
+      certification:
+        next-code: content.certification.nextCode
+
+storage:
+  end-point: file://
+
+security:
+  cors:
+    origin:
+      markets:
+      creators:
+      admins:
+      internal: http://localhost:8080,http://localhost:8080/
+      external:
+
+ontology:
+  config: security/testnet/test_SDK_config.json
+  rpc-chain-node-url: http://polaris2.ont.io:20336
+  restful-chain-node-url: http://polaris2.ont.io:20334
+  comm-type: RPC # RPC or RESTFUL
+  account:
+    path: security/testnet/test_key.json # from authenticator, account info
+    password: your-password
+
+logging:
+  #pattern:
+  #console: "[%-5level %d{yyyy-MM-dd HH:mm:ss}] [%-8thread] [%logger{0}:%line] - %msg%n"
+  level:
+    ROOT: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+    com:
+      ogqcorp:
+        market:
+          hash: DEBUG

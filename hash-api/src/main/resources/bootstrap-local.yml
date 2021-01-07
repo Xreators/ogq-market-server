@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: marketHash
+  cloud:
+    config:
+      enabled: false

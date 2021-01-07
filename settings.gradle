@@ -1,0 +1,10 @@
+rootProject.name = 'market-server'
+
+include 'common'
+include 'domain'
+include 'repository'
+include 'infrastructure'
+include 'ontology'
+include 'hash-api'
+include 'relay-api'
+

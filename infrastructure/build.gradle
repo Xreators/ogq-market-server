@@ -1,0 +1,9 @@
+bootJar { enabled = false }
+jar { enabled = true }
+dependencies {
+    implementation "com.rabbitmq:amqp-client:${rabbitmqVersion}"
+    implementation 'org.springframework.amqp:spring-rabbit'
+
+    testImplementation 'org.springframework.amqp:spring-rabbit-junit'
+}
+evaluationDependsOn(':common')
